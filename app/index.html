@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nasa Flickr Gallery</title>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="app.css"/>
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <h1>Nasa Flickr Gallary</h1>
+  </div>
+</header>
+<main class="container img-box"  ng-app="nasaFlickrApp" ng-controller="nasaFlickrController">
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-sm-12">
+      <div class="form-group inner-addon right-addon"> <i class="glyphicon glyphicon-search"></i>
+        <input type="text" class="form-control" ng-model="query" placeholder="Search from name...">
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-6 col-sm-12">
+      <div class="form-group">
+        <div class="inner-addon right-addon"> <i class="glyphicon glyphicon-filter"></i>
+          <select class="form-control" ng-model="photoOrder">
+            <option value="title">Ascending</option>
+            <option value="-title">Descending</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" infinite-scroll="flickrPhotos.loadNext()" infinite-scroll-disabled="flickrPhotos.busy" infinite-scroll-distance="1">
+    <div ng-repeat="item in flickrPhotos.items | filter: {title: query} | orderBy: photoOrder">
+      <flickr-photo></flickr-photo>
+    </div>
+    <p ng-show="flickrPhotos.busy" class="message">Loading data...</p>
+    <p ng-show="flickrPhotos.complete" class="message">Thats all folks!!!</p>
+  </div>
+</main>
+<footer>
+  <div class="container">&copy; Copyright</div>
+</footer>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+<script src="app.js"></script>
+<script src="services/flickr-service.js"></script>
+<script src="controller/nasa-flickr-controller.js"></script>
+</body>
+</html>
