@@ -27,4 +27,4 @@ bower install
 ```
 which will download all the dependencies required by this application.
 
-Now copy the app folder from this repository and copy it to your webserver root folder. You can then use this application.
+* Now copy the app folder from this repository and copy it to your webserver root folder. You can then use this application.
